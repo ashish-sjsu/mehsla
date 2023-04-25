@@ -166,9 +166,10 @@ public class MainActivity extends AppCompatActivity {
             BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(address);
             BluetoothSocket tmp = null;
             if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                return;
+                //return;
             }
-            UUID uuid = bluetoothDevice.getUuids()[0].getUuid();
+            //UUID uuid = bluetoothDevice.getUuids()[0].getUuid();
+            UUID uuid = UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
 
             try {
                 /*
@@ -189,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             // Cancel discovery because it otherwise slows down the connection.
             BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
             if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                return;
+                //return;
             }
             bluetoothAdapter.cancelDiscovery();
             try {

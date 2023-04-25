@@ -10,7 +10,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -30,7 +32,8 @@ public class SelectDeviceActivity extends AppCompatActivity {
 
         // Get List of Paired Bluetooth Device
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            return;
+            //requestPermissions(new String[]{android.Manifest.permission.BLUETOOTH_CONNECT}, 222);
+            //return;
         }
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
         List<Object> deviceList = new ArrayList<>();
@@ -39,9 +42,12 @@ public class SelectDeviceActivity extends AppCompatActivity {
             for (BluetoothDevice device : pairedDevices) {
                 String deviceName = device.getName();
                 String deviceHardwareAddress = device.getAddress(); // MAC address
+                device.fetchUuidsWithSdp();
+                ParcelUuid[] uuids = device.getUuids();
                 DeviceInfoModel deviceInfoModel = new DeviceInfoModel(deviceName,deviceHardwareAddress);
                 deviceList.add(deviceInfoModel);
             }
+            Toast.makeText(this, "Device List::" + deviceList.size(), Toast.LENGTH_SHORT).show();
             // Display paired device using recyclerView
             RecyclerView recyclerView = findViewById(R.id.recyclerViewDevice);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));

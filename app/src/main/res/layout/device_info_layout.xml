@@ -7,7 +7,7 @@
     android:layout_margin="5dp"
     android:orientation="horizontal">
         <TextView
-            android:layout_width="300px"
+            android:layout_width="500px"
             android:layout_height="wrap_content"
             android:id="@+id/textViewDeviceName"
             android:text="Device Name"/>
